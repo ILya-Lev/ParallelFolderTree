@@ -15,7 +15,7 @@ namespace DomainModel
 		public static Tree TreeFrom(string path)
 		{
 			if (File.Exists(path))
-				return new Tree { Data = new FileInfo(path) };
+				return new Tree { Data = new FileInfo(path), IsEnumerated = true };
 
 			if (Directory.Exists(path))
 				return new Tree { Data = new DirectoryInfo(path) };
