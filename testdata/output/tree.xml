@@ -1,0 +1,29 @@
+﻿<Dir Name="tree" Created="Thursday, 6 April, 2017 19:13:02">
+  <File Name="1-3.txt" Created="Thursday, 6 April, 2017 19:13:27" />
+  <File Name="1-2.txt" Created="Thursday, 6 April, 2017 19:13:25" />
+  <Dir Name="1-2" Created="Thursday, 6 April, 2017 19:13:34">
+    <Dir Name="2-2-3" Created="Thursday, 6 April, 2017 19:14:14">
+      <File Name="4-2.txt" Created="Thursday, 6 April, 2017 19:14:22" />
+      <File Name="4-1.txt" Created="Thursday, 6 April, 2017 19:14:25" />
+    </Dir>
+    <File Name="2-2-2.txt" Created="Thursday, 6 April, 2017 19:14:16" />
+    <Dir Name="2-2-2" Created="Thursday, 6 April, 2017 19:14:12" />
+    <File Name="2-2-1.txt" Created="Thursday, 6 April, 2017 19:14:18" />
+    <Dir Name="2-2-1" Created="Thursday, 6 April, 2017 19:14:09">
+      <Dir Name="2-3-1" Created="Thursday, 6 April, 2017 19:14:33">
+        <File Name="4-1.txt" Created="Thursday, 6 April, 2017 19:14:37" />
+      </Dir>
+    </Dir>
+  </Dir>
+  <File Name="1-1.txt" Created="Thursday, 6 April, 2017 19:13:22" />
+  <Dir Name="1-1" Created="Thursday, 6 April, 2017 19:13:31">
+    <Dir Name="2-4" Created="Thursday, 6 April, 2017 19:13:46" />
+    <Dir Name="2-3" Created="Thursday, 6 April, 2017 19:13:44">
+      <File Name="3-1.txt" Created="Thursday, 6 April, 2017 19:13:57" />
+    </Dir>
+    <File Name="2-2.txt" Created="Thursday, 6 April, 2017 19:13:49" />
+    <Dir Name="2-2" Created="Thursday, 6 April, 2017 19:13:42" />
+    <File Name="2-1.txt" Created="Thursday, 6 April, 2017 19:13:53" />
+    <Dir Name="2-1" Created="Thursday, 6 April, 2017 19:13:39" />
+  </Dir>
+</Dir>
