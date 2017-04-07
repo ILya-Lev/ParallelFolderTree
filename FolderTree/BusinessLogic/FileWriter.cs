@@ -44,29 +44,24 @@ namespace BusinessLogic
 			_xmlTextWriter.Dispose();
 		}
 
-		private readonly HashSet<Tree> _seenItems = new HashSet<Tree>();
 
 		public void StoreTree()
 		{
-			_root.TraverseTree(OnMeetNode);
+			var seenItems = new HashSet<Tree>();
+			Func<Tree, bool> onMeet = node => WriteToFile(node, seenItems);
+			_root.TraverseTree(onMeet);
 		}
 
-		private bool OnMeetNode(Tree current)
+		private bool WriteToFile(Tree current, HashSet<Tree> seenItems)
 		{
-			if (_seenItems.Contains(current))
+			if (seenItems.Contains(current))
 			{
 				_xmlTextWriter.WriteEndElement();
 				_xmlTextWriter.Flush(); //required to avoid data lossage
 				return true;
 			}
 
-			WriteToFile(current.Data);
-			_seenItems.Add(current);
-			return false;
-		}
-
-		private void WriteToFile(FileSystemInfo data)
-		{
+			FileSystemInfo data = current.Data;
 			if (data is FileInfo)
 				_xmlTextWriter.WriteStartElement("File");
 			else
@@ -74,6 +69,8 @@ namespace BusinessLogic
 
 			_xmlTextWriter.WriteAttributeString("Name", data.Name);
 			_xmlTextWriter.WriteAttributeString("Created", data.CreationTime.ToString("F"));
+			seenItems.Add(current);
+			return false;
 		}
 	}
 }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleWriter.cs" />
     <Compile Include="FileWriter.cs" />
     <Compile Include="FolderTraverser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
