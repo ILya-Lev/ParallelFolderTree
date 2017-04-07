@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace BusinessLogic
 {
@@ -17,33 +16,23 @@ namespace BusinessLogic
 
 		public void Traverse()
 		{
-			var layer = new Queue<Tree>();
-			layer.Enqueue(_root);
+			_root.FillIn(FolderTraversingLayerGenerator);
+		}
 
-			while (layer.Count != 0)
-			{
-				Thread.Sleep(100);
-				var current = layer.Dequeue();
-				lock (current)
-				{
-					current.IsEnumerated = true;
-
-					var filesFirst = (current.Data as DirectoryInfo)?.EnumerateFileSystemInfos()
+		private static IEnumerable<Tree> FolderTraversingLayerGenerator(Tree localRoot)
+		{
+			var filesFirst = (localRoot.Data as DirectoryInfo)?.EnumerateFileSystemInfos()
 										.ToList().OrderBy(f => f is FileInfo ? 0 : 1)
 									?? Enumerable.Empty<FileSystemInfo>();
-					foreach (var info in filesFirst)
-					{
-						var subNode = new Tree { Root = current.Root, Data = info };
-						current.Clidren.Add(subNode);
+			foreach (var info in filesFirst)
+			{
+				var subNode = new Tree { Root = localRoot.Root, Data = info };
+				localRoot.Children.Add(subNode);
 
-						if (info is FileInfo)
-							subNode.IsEnumerated = true;
-						else
-							layer.Enqueue(subNode);
-					}
-
-					Monitor.PulseAll(current);
-				}
+				if (info is FileInfo)
+					subNode.IsFilled = true;
+				else
+					yield return subNode;
 			}
 		}
 	}

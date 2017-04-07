@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Xml;
 
 namespace BusinessLogic
@@ -49,34 +48,21 @@ namespace BusinessLogic
 
 		public void StoreTree()
 		{
-			var branch = new Stack<Tree>();
-			branch.Push(_root);
+			_root.TraverseTree(OnMeetNode);
+		}
 
-			while (branch.Count != 0)
+		private bool OnMeetNode(Tree current)
+		{
+			if (_seenItems.Contains(current))
 			{
-				Thread.Sleep(1);
-				var current = branch.Peek();
-				lock (current)
-				{
-					while (!current.IsEnumerated)
-						Monitor.Wait(current);
-
-					if (_seenItems.Contains(current))
-					{
-						branch.Pop();
-						_xmlTextWriter.WriteEndElement();
-						_xmlTextWriter.Flush(); //required to avoid data lossage
-						continue;
-					}
-					WriteToFile(current.Data);
-					_seenItems.Add(current);
-
-					foreach (var node in current.Clidren)
-					{
-						branch.Push(node);
-					}
-				}
+				_xmlTextWriter.WriteEndElement();
+				_xmlTextWriter.Flush(); //required to avoid data lossage
+				return true;
 			}
+
+			WriteToFile(current.Data);
+			_seenItems.Add(current);
+			return false;
 		}
 
 		private void WriteToFile(FileSystemInfo data)
